@@ -494,7 +494,7 @@ app.post('/contact', (req,res)=>{
     
     const mailOptions = {
       from: 'adnanshanto1@gmail.com',
-      to: 'ashik@a2zcreatives.com',
+      to: 'info@mirzaazam.info',
       subject: 'Message from your website',
       html:content
     };
