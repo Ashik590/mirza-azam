@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirza Azam - Admin Panal</title>
+    <link rel="shortcut icon" href="/img/fav.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="modal fade" id="confirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you confirm for logout?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <a href="/logout" class="btn btn-primary">Logout</a>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div id="dashboard">
+        <h2>Dashboard</h2>
+        <div>
+            <ul class="ps-0 mb-0">
+                <li data-display="#startup" class="active">Startup</li>
+                <li data-display="#blogs">Blogs</li>
+                <li data-display="#gallery">Gallery</li>
+                <li data-display="#videos">Videos</li>
+                <li class="visit"><a href="/">Visit Site</a></li>
+            </ul>
+            <span data-bs-toggle="modal" data-bs-target="#confirm" class="logout" href="/logout">Logout</span>
+        </div>
+    </div>
+    <div id="main">
+        <div id="startup">
+            <h1>Hello <span>Mirza Azam!</span></h1>
+            <h2>Welcome to <span>Admin panal</span> Dashboard</h2>
+            <a href="/" class="shadow btns mt-3">Visit Website</a>
+        </div>
+        <div id="blogs" class="d-none">
+            <h1 class="text-center">ALL Blogs</h1>
+            <a class="btn btn-info mb-3 fw-bolder" href="/write-blog">Add a blog</a>
+            <div class="d-flex">
+                {{#each blog}}
+                <div class="item shadow border">
+                    <div style="background: url('upload/{{this.photo}}');" class="photo_blog"></div>
+                    <div class="info_blog">
+                        <small class="date_blog me-3">{{this.date}}</small>
+                        <small class="comment_blog">Comments : <span>{{this.comment.length}}</span></small>
+                        <h2 class="title_blog">{{this.title}}</h2>
+                        <p class="desc_blog text-secondary mb-1">{{this.desc}}</p>
+                        <b class="mb-2 d-block">Category: {{this.category}}</b>
+
+                        <div class="d-flex align-items-center">
+                            <a class="url_blog btns" href="/blogs/{{this._id}}">Read Blog</a>
+                            <a href="/edit-blog/{{this._id}}" class="btn btn-success">Edit</a>
+                            <button data-post="/delete-blog" data-id="{{this._id}}" class="btn btn-danger del_blog confirm">
+                                <span>Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="comments">
+                        <h3 class="text-center">All Comments</h3>
+                        <span class="d-grid">
+                            <small>Name</small>
+                            <small>Email</small>
+                            <small>Message</small>
+                            <small>Date</small>
+                        </span>
+                        <div>
+                            {{#each this.comment}}
+                            <span class="d-grid">
+                                <small>{{this.name}}</small>
+                                <small>{{this.email}}</small>
+                                <small>{{this.message}}</small>
+                                <small class="date_blog">{{this.date}}</small>
+                                <small data-post="/delete-comment" data-id='{{this._id}}' class="confirm">
+                                    <span>Delete</span>
+                                </small>
+                            </span>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div id="gallery" class="d-none">
+            <h1 class="text-center mb-4">Your Gallery</h1>
+            <form action="/post_gallery" enctype="multipart/form-data" method="POST" class="border p-2 align-items-center mb-3 shadow">
+                <input type="file" accept="image/*" name="gallery" id="galleryPhoto">
+                <select name="category" class="form-select" aria-label="Default select example">
+                    <option value="City" selected>City</option>
+                    <option value="Politics">Politics</option>
+                    <option value="Volunteer">Volunteer</option>
+                </select>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+            <a href="/gallery" class="btn btn-success">Preview</a>
+            <div class="d-grid mt-3">
+                {{#each gallery}}
+                <div class="item">
+                    <div style="background: url('upload/{{this.src}}');" class="image">
+                        <a target="_blank" href="upload/{{this.src}}" class="btn btn-success">View</a>
+                        <span data-post='/delete_gallery/{{this._id}}' data-id='{{this._id}}' class="btn btn-danger confirm">
+                            <span>Delete</span>
+                        </span>
+                    </div>
+                    <span><b>Category :</b> {{this.category}}</span>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div id="videos" class="d-none">
+            <h1 class="text-center mb-4">Your videos</h1>
+            <a href="/speech#video_gallery" class="btn-info btn mb-3">Preview</a>
+            <div class="d-flex justify-content-center">
+                <form class="item p-3 border mb-4 shadow" action="/video_upload" enctype="multipart/form-data" method="POST">
+                    <input name="link" type="text" placeholder="Enter the link a youtube video" class="w-100 mb-2 form-control">
+                    <input type="file" name="thumnail">
+                    <button class="btn btn-sm btn-success" type="Submit">Submit</button>
+                </form>
+            </div>
+            <div class="d-grid">
+                {{#each video}}
+                <div class="item border shadow" style="background: url('upload/{{this.thumnail}}');">
+                    <a target="_blank" href={{this.link}} class="btn btn-success">Watch</a>
+                    <small data-post="/delete-video/{{this._id}}" data-id='no-value' class="mt-2 confirm btn btn-danger">
+                        <span>Delete</span>
+                    </small>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaSCript included here-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        const blogs = document.querySelector("#blogs > div");
+
+        if(blogs.innerText == ''){
+            blogs.innerHTML = 'No blog available'
+        }
+
+        const gallery = document.querySelector("#gallery > div");
+
+        if(gallery.innerText == ''){
+            gallery.innerHTML = 'No gallery available'
+        }
+
+        const video = document.querySelector("#videos > div");
+
+        if(video.innerText == ''){
+            video.innerHTML = 'No video available'
+        }
+
+        const btns = document.querySelectorAll("ul li[data-display]");
+        const divs = document.querySelectorAll("#main > div");
+
+        btns.forEach(elem =>{
+            elem.addEventListener("click", (e)=>{
+                let id = e.target.getAttribute("data-display");
+
+                let element = document.querySelector(id);
+
+                for(const btn of btns){
+                    btn.classList.remove("active")
+                }
+                e.target.classList.add("active");
+                console.log(elem)
+                
+                for(const d of divs){
+                    d.classList.add("d-none")
+                }
+
+                element.classList.remove("d-none");
+
+            })
+        })
+
+        // confimation for deleting comment
+
+        const confirmBtn = document.querySelectorAll('.confirm>span');
+
+        for(const c of confirmBtn){
+            c.addEventListener('click', ()=>{
+                let id = c.parentElement.getAttribute('data-id');
+                let post = c.parentElement.getAttribute('data-post');
+                let span = document.createElement('span');
+                span.classList.add('confirmation')
+                span.innerHTML = `
+                    <span class='d-block'>Are you confirm?</span>
+                    <span class='d-flex'>
+                        <form action='${post}' method='POST'>
+                            <input type='text' name='del' value=${id} class='d-none'/>
+                            <button type='submit'>YES</button>
+                        </form>
+                        <button class='no-del-com' onclick='no_del(event)'>NO</button>
+                    </span>
+                `;
+                c.parentElement.appendChild(span)
+                console.log("Creating")
+            })
+        }
+
+
+        function no_del(e){
+            e.target.parentElement.parentElement.remove();
+        }
+
+        // formatting date
+
+        const date_blog = document.querySelectorAll('.date_blog');
+
+        date_blog.forEach(date =>{
+            date.innerText = moment(date.innerText).format('LLL');
+        })
+
+        // validation for gallery post
+
+        const galleryPhoto = document.getElementById('galleryPhoto');
+        const galleryBtn = document.querySelector('#gallery form button');
+
+        galleryBtn.addEventListener('click', ()=>{
+            if(galleryPhoto.value == ''){
+                galleryBtn.setAttribute('type', 'button');
+                alert('Please, choose a photo for upload')
+                console.log('value is none')
+            }else{
+                galleryBtn.setAttribute('type', 'submit');
+                console.log('value is on')
+            }
+        })
+    </script>
+</body>
+</html>

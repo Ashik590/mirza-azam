@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirza Azam - News and Events</title>
+    <link rel="shortcut icon" href="/img/fav.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/timeline.css">
+    <link rel="stylesheet" href="css/common-phone.css">
+</head>
+<body>
+    {{>header}}
+    <nav>
+        <ul class="ps-0 mb-0">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/about">About</a>
+            </li>
+            <li>
+                <a href="/timeline">Timeline</a>
+            </li>
+            <li>
+                <a href="/gallery">Gallery</a>
+            </li>
+            <li>
+                <a href="/speech">Speeches & Reports</a>
+            </li>
+            <li>
+                <a class="active" href="/news">News & Events</a>
+            </li>
+            <li>
+                <a href="/blogs">Blogs</a>
+            </li>
+            <li>
+                <a href="/contact">Contacts</a>
+            </li>
+        </ul>
+    </nav>
+
+    <section id="news">
+      <div class="container">
+        <small class="t-small">
+          Latest News & Events
+        </small>
+        <h1 class="b-line">
+          The Latest News
+        </h1>
+        <div class="row">
+          <div class="newsDiv">
+            <div class="col-lg-8 mx-auto">
+            <!-- main components -->
+            {{#each news}}
+              <div class="d-grid shadow newsItem newsItem-{{this.sno}}">
+                <a href="/">
+                    <img class="w-100 h-100 max-w" src='upload/{{this.photo}}' alt="photo">
+                </a>
+                <div class="p-3">
+                  <p class="d-flex">
+                      <small class="golden_small me-2 date">
+                          <img src="img/calender.svg" alt="icon">
+                          {{this.date}}
+                      </small>
+                      <small class="text-secondary">{{this.comment.length}} COMMENT</small>
+                  </p>
+                  <h3 class="fw-bold">{{this.title}}</h3>
+                  <p class="text-secondary">{{this.desc}}</p>
+                  <hr>
+                  <a href='blogs/{{this._id}}' class="btns me-3">READ MORE</a>
+                </div>
+              </div>
+            {{/each}}
+            </div>
+          </div>
+          <!-- pagination -->
+          <div class="pagination mt-4 d-flex justify-content-center">
+            <span class="prev"></span>
+            <span class="page_num active">1</span>
+            <span class="page_num">2</span>
+            <span class="page_num">3</span>
+            <span class="next">></span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="contact">
+        <div class="container">
+            <small class="t-small">Stay in Touch with Us</small>
+            <h1 class="b-line">
+                Contact Information
+            </h1>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14475.179774871283!2d89.70991376979708!3d24.904975206904382!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fd9d71c653140b%3A0x7d3856f09bb973dd!2sMadarganj!5e0!3m2!1sen!2sbd!4v1631336075298!5m2!1sen!2sbd" width="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div class="row mt-4 gy-3">
+                <div class="col-md-4">
+                    <small class="golden_small text-center d-block">CALL US</small>
+                    <h4 class="text-center fw-bold">Make a Call</h4>
+                    <small class="text-secondary text-center d-block">+880 1700000000</small>
+                </div>
+                <div class="col-md-4">
+                    <small class="golden_small text-center d-block">VISIT US</small>
+                    <h4 class="text-center fw-bold">Our Location</h4>
+                    <small class="text-secondary text-center d-block">Madarganj, Jamalpur –  2000,</small>
+                </div>
+                <div class="col-md-4">
+                    <small class="golden_small text-center d-block">MAIL US</small>
+                    <h4 class="text-center fw-bold">Send A Message</h4>
+                    <small class="text-secondary text-center d-block">
+                       <a href="mailto:info@mirzaazam.info">info@mirzaazam.info</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="upper_footer">
+        <div class="d-flex justify-content-center">
+            <a href="/">
+                <img src="img/logo.png" alt="Logo">
+            </a>
+        </div>
+    </section>
+    <footer>
+        <div class="p-3">
+            Mirza Azam © 2021. All Rights Reserved. Developed by A2Z Creatives & IT
+        </div>
+    </footer>
+
+    <!-- JavaScript is included -->
+    <script src="js/nav.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // news section pagination logic
+
+        const page_numNews = document.querySelectorAll("#news .pagination span.page_num");
+        const prevNews = document.querySelector("#news .pagination .prev");
+        const nextNews = document.querySelector("#news .pagination .next");
+        let currentPageNews = 1;
+        function currentPageChangeNews(num){
+            currentPageNews = parseInt(num);
+            console.log(currentPageNews)
+            paginatingNews(currentPageNews)
+        }
+
+        const backend2 = `${{news.length}}`;
+        const itemNewsLength = parseInt(backend2.replace("$",''))
+
+        const limit = 2;
+
+        const lastIndexNews = Math.ceil(itemNewsLength / limit);
+
+        prevNews.addEventListener('click', ()=>{
+            page_numNews[0].innerHTML = parseInt(page_numNews[0].innerHTML) - limit;
+            page_numNews[1].innerHTML = parseInt(page_numNews[1].innerHTML) - limit;
+            page_numNews[2].innerHTML = parseInt(page_numNews[2].innerHTML) - limit;
+            prevDisplayNews()
+            page_numActiveNews(page_numNews[2])
+        })
+        nextNews.addEventListener('click', ()=>{
+            page_numNews[0].innerHTML = parseInt(page_numNews[0].innerHTML) + limit;
+            page_numNews[1].innerHTML = parseInt(page_numNews[1].innerHTML) + limit;
+            page_numNews[2].innerHTML = parseInt(page_numNews[2].innerHTML) + limit;
+            prevDisplayNews()
+            page_numActiveNews(page_numNews[0])
+        })
+        function prevDisplayNews(){
+            if(parseInt(page_numNews[0].innerHTML) === 1){
+                prevNews.classList.add("d-none")
+            }else{
+                prevNews.classList.remove("d-none")
+            }
+            if(parseInt(page_numNews[2].innerHTML) === lastIndexNews){
+                nextNews.classList.add("d-none")
+            }else{
+                if(parseInt(page_numNews[1].innerHTML) === lastIndexNews){
+                    page_numNews[2].classList.add("d-none");
+                    nextNews.classList.add("d-none")
+                }else{
+                    if(parseInt(page_numNews[0].innerHTML) === lastIndexNews){
+                        page_numNews[1].classList.add("d-none");
+                        page_numNews[2].classList.add("d-none");
+                        nextNews.classList.add("d-none")
+                    }else{
+                        page_numNews[1].classList.remove("d-none");
+                        page_numNews[2].classList.remove("d-none");
+                        nextNews.classList.remove("d-none")
+                    }
+                }
+            }
+        }
+        prevDisplayNews();
+
+        for(const elemNews of page_numNews){
+            elemNews.addEventListener("click",(e)=>{
+                page_numActiveNews(e.target)
+            })
+        }
+
+        //Paginating div logic
+
+
+        function page_numActiveNews(element){
+            element.classList.add("active");
+            
+            currentPageChangeNews(element.innerHTML)
+            if(element.previousElementSibling){
+                if(element.previousElementSibling.getAttribute('class').replace("page_num ",'') == 'active'){
+                    element.previousElementSibling.classList.remove("active");
+                }
+                if(element.previousElementSibling.previousElementSibling){
+                    if(element.previousElementSibling.previousElementSibling.getAttribute('class').replace("page_num ",'') == 'active'){
+                        element.previousElementSibling.previousElementSibling.classList.remove("active");
+                    }
+                }
+            }
+            if(element.nextElementSibling){
+                if(element.nextElementSibling.getAttribute('class').replace("page_num ",'') == 'active'){
+                    element.nextElementSibling.classList.remove("active");
+                }
+                if(element.nextElementSibling.nextElementSibling){
+                    if(element.nextElementSibling.nextElementSibling.getAttribute('class').replace("page_num ",'') == 'active'){
+                        element.nextElementSibling.nextElementSibling.classList.remove("active");
+                    }
+                }
+            }
+        }
+        function paginatingNews(num){
+          let item = document.querySelectorAll('#news .newsItem');
+          let className1 = `newsItem-${(num*2) - 1}`;
+          let className2 = `newsItem-${num*2}`;
+
+          let item1 = document.getElementsByClassName(className1)[0];
+
+          for(let i of item){
+            i.classList.add('d-none');
+          }
+          item1.classList.remove('d-none');
+          if(document.getElementsByClassName(className2)[0]){
+            document.getElementsByClassName(className2)[0].classList.remove('d-none');
+          }
+        }
+        paginatingNews(1)
+
+        // formatting date 
+
+        const dates = document.querySelectorAll('.date');
+
+        for(const d of dates){
+            d.innerText = moment(d.innerText).format('LLL');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+/* recog section */
+#recog{
+    background: rgb(235, 235, 235);
+}
+#recog img[alt="Icon"]{
+    width: 50px;
+    display: block;
+    margin: auto;
+}
+
+@media screen and (max-width:991px) {
+    #recog .row{
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .max-w {
+        max-width: 300px;
+    }
+    #about .bt{
+        margin-top: -80px;
+    }
+}

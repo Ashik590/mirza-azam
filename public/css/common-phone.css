@@ -1,0 +1,126 @@
+@media screen and (max-width:1200px) {
+    .bt {
+        right: -20px;
+    }
+}
+@media screen and (max-width:1000px) {
+    .bt {
+        right: 0;
+    }
+    #menu>div{
+        width: 50%;
+    }
+}
+@media screen and (max-width:991px) {
+    h1.b-line {
+        margin-bottom: 50px;
+    }
+    .dev_img {
+        height: 270px;
+    }
+}
+@media screen and (max-width:800px) {
+    nav ul {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        text-align: center;
+        gap: 0px;
+    }
+    nav{
+        margin: 0 20px;
+    }
+}
+@media screen and (max-width:767px) {
+    #news .newsItem{
+        grid-template-columns: 1fr !important;
+    }
+    #news .newsDiv .d-grid {
+        gap: 0px ;
+    }
+    #news .newsDiv .d-grid> a>img {
+        padding-bottom: 0;
+    }
+    .max-w{
+        max-width: 350px;
+        margin: auto;
+        display: block;
+    }
+    #dev_work .row .col-md-4:nth-child(2) {
+        max-width: 400px;
+        margin: 20px auto;
+    }
+    #news .row > div > div.d-grid{
+        gap: 0px;
+        grid-template-columns: 1fr;
+    }
+    h1{
+        font-size:calc(30px + 2vw);
+    }
+    #news .p-3>p.d-flex {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .dev_work .row
+    {
+        gap: 20px;
+    }
+}
+@media screen and (max-width:600px) {
+    #news .row > div > div.d-grid> a>img {
+        max-width: 300px;
+        margin: auto;
+        display: block;
+    }
+}
+@media screen and (max-width:575px) {
+    .container{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    #hero .container{
+        padding-top: 20px;
+    }
+}
+@media screen and (max-width:500px) {
+    #menu>div{
+        width: 70%;
+    }
+    .btns{
+        font-size: 11px;
+    }
+    nav ul li a {
+        font-size: 12px;
+    }
+    .max-w{
+        max-width: 250px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+@media screen and (max-width:400px) {
+    h1 {
+        font-size: calc(30px + 1vw);
+    }
+    header .container>div > div {
+        font-size: 11px;
+    }
+}
+@media screen and (max-width:350px) {
+    nav {
+        margin: 0 10px;
+    }
+    h1.b-line {
+        margin-bottom: 40px;
+    }
+    h1.b-line::after {
+        bottom: -10px;
+    }
+    h1 {
+        font-size: calc(26px + 1vw);
+    }
+}

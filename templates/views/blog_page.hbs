@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirza Azam - {{blog.title}}</title>
+    <link rel="shortcut icon" href="/img/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/calender.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/common-phone.css">
+    <link rel="stylesheet" href="../css/blog.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+        #text div,#text{
+            color: rgb(98, 98, 98);
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+        }
+        #text b{
+            font-family: 'Roboto', sans-serif;
+            color: #111;
+        }
+        small.date {
+            display: block;
+            margin-bottom: 15px;
+            font-family: 'Roboto';
+            font-size: 11px;
+            color: #8a8787;
+        }
+        .itemDiv {
+            display: grid;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container py-2">
+            <div class="address d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <span class="me-2">
+                        <img class="h-100" src="../img/location.svg" alt="location">
+                    </span>
+                    <span>
+                        <small class="golden_small">VISIT US</small>
+                        <br>
+                        <small class="text-secondary">Madarganj, Jamalpur 2000</small>
+                    </span>
+                </div>
+                <a href="/" class="btns">CONTACT US</a>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <ul class="ps-0 mb-0">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/about">About</a>
+            </li>
+            <li>
+                <a href="/timeline">Timeline</a>
+            </li>
+            <li>
+                <a href="/gallery">Gallery</a>
+            </li>
+            <li>
+                <a href="/speech">Speeches & Reports</a>
+            </li>
+            <li>
+                <a href="/news">News & Events</a>
+            </li>
+            <li>
+                <a class="active" href="/blogs">Blogs</a>
+            </li>
+            <li>
+                <a href="/contact">Contacts</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-7">
+                    <small class="date">{{blog.date}}</small>
+                    <img class="photo_post d-block mb-3 shadow" src="../upload/{{blog.photo}}" alt="photo">
+                    <div class="content mb-5">
+                        <h1 class="mb-3">{{blog.title}}</h1>
+                        <div id="text">{{blog.content}}</div>
+                    </div>                       
+                    <div class="comment my-4">
+                        <h2 class="text-center">Add Your Comment</h2>
+                        <form action="/blogs/{{blog._id}}" method="POST">
+                            <div class="row gy-3">
+                                <div class="col-md-6">
+                                <input class="w-100 form-control" name='name' type="text" placeholder="Your name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="w-100 form-control" name="email" type="email" placeholder="Your e-mail" required>
+                                </div>
+                                <div class="col-12">
+                                    <textarea placeholder="Type your message" name="message" class="w-100 form-control" rows="8" required></textarea>
+                                </div>
+                            </div>
+                            <button class="btns mt-3" type="submit">Submit</button>
+                        </form>
+                    </div>
+                    <div class="all-comments">
+                        <h2 class="text-center fw-bold">All Comments</h2>
+                        <div class="itemDiv">
+                            {{#each blog.comment}}
+                                <div class="item">
+                                    <h4 class="mb-0 text-capitalize">{{this.name}}</h4>
+                                    <small><i>{{this.email}}</i></small>
+                                    <p class="mb-1">{{this.message}}</p>
+                                    <small class="date text-secondary d-block text-end text-uppercase">{{this.date}}</small>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-flex">
+                    <div class="category utility">
+                        <h2>Categories</h2>
+                        <ul class="list-group">
+                            <li>
+                                <a href="/" class="list-group-item">Development Work</a>
+                            </li>
+                            <li>
+                                <a href="/" class="list-group-item">News and Events</a>
+                            </li>
+                            <li>
+                                <a href="/" class="list-group-item">Speeches and Interviews</a>
+                            </li>
+                            <li>
+                                <a href="/" class="list-group-item">Social activities</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="recent-news utility">
+                        <h2>Recent News</h2>
+                        <div class='d-flex'>
+                            <div class="item shadow">
+                                <div style="background:url('../img/speech.jpg');"></div>
+                                <div>
+                                    <h5 class="fw-bold">How well do you know government?</h5>
+                                    <small class="golden_small d-flex align-items-center">
+                                        <img class="me-2" src="../img/calender.svg" alt="icon">
+                                        NOVEMBER 22, 2017
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="item shadow">
+                                <div style="background:url('../img/speech.jpg');"></div>
+                                <div>
+                                    <h5 class="fw-bold">How well do you know government?</h5>
+                                    <small class="golden_small d-flex align-items-center">
+                                        <img class="me-2" src="../img/calender.svg" alt="icon">
+                                        NOVEMBER 22, 2017
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calenderDiv utility">
+                        <h2>Calender</h2>
+                        <div class="calender"></div>
+                    </div>
+                    <div class="newsletter utility">
+                        <h2>Newsletter</h2>
+                        <span class="t-small mb-2">Subscribe to our newsletter</span>
+                        <form action="/" method="POST">
+                            <input type="text" placeholder="Enter your email" class="form-control">
+                            <button class="btns mt-2" type="submit">SUBSCRIBE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="upper_footer">
+        <div class="d-flex justify-content-center">
+            <a href="/">
+                <img src="../img/logo.png" alt="Logo">
+            </a>
+        </div>
+    </section>
+    <footer>
+        <div class="p-3">
+            Mirza Azam © 2021. All Rights Reserved. Developed by A2Z Creatives & IT
+        </div>
+    </footer>
+
+    <!-- JavaScript is included -->
+    <script src="../js/nav.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/calender.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".calender").simpleCalendar({
+                displayEvent:false
+            });
+        });
+
+        const text = document.getElementById('text');
+        text.innerHTML = text.innerText;
+        const dates = document.querySelectorAll("small.date");
+
+        for(const date of dates){
+            date.innerHTML = moment(date.innerHTML).format('LLL');
+        }
+
+        const itemDiv = document.querySelector('.itemDiv');
+
+        if(itemDiv.innerText == ''){
+            itemDiv.innerText = 'No comment here'
+        }
+    </script>
+</body>
+</html>

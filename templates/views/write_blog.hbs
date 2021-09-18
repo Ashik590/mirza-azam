@@ -1,0 +1,175 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mirza Azam - Write a blog</title>
+    <link rel="shortcut icon" href="/img/fav.png" type="image/x-icon">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      h1{ text-align: center; margin: 20px; } #editorjs{ overflow: hidden;overflow: auto;
+      resize: vertical; max-height: 300px; height: 100%;   border: 5px solid #3e94ff; } .control { display:
+      flex; justify-content: center; gap: 10px; } .control
+      i { background: #c5c5c5; width: 25px; height: 25px; display: grid;
+      place-items: center; } input.link { max-width: 300px; } .linkBtn {
+      display: grid; place-items: center; font-size: 22px; padding: 6px;
+      background: #d2d2d2; margin-left: 5px; }
+      .goLink{
+          cursor: pointer;
+          color: #0d6efd;
+      }
+      .setUrl{
+          height: 0px;
+          overflow: hidden;
+          transition: all 0.3s ease;
+      }
+      .h-35{
+          height: 35px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="d-flex justify-content-center align-items-center pt-2">
+      <a class="btn btn-primary" href="/admin">Back to admin panal</a>
+    </div>
+    <main>
+      <h1>Write a blog</h1>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 mx-auto">
+            <form action="/write-blog" method="POST" enctype="multipart/form-data">
+            <b class="d-block mb-1">Enter a title for the post</b>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Enter a title"
+              class="form-control mb-3"
+            />
+            <b class="d-block mb-1">Enter a brief description</b>
+            <textarea
+              placeholder="Enter a brief description"
+              class="form-control mb-3"
+              id="desc"
+              rows="4"
+              name="desc"
+            ></textarea>
+            <b class="d-block mb-1">Choose a photo for the post</b>
+            
+            <input type="file" id='file' name="file" class="d-block mb-3">
+
+            <b class="d-block mb-1">Choose a category</b>
+            <select name="category" id="category" class="form-select mb-3" aria-label="Default select example">
+              <option value="Development Work" selected>Development Work</option>
+              <option value="News and Events">News and Events</option>
+              <option value="Speeches and Interviews">Speeches and Interviews</option>
+              <option value="Social Activities">Social Activities</option>
+            </select>
+            
+            <div class="control">
+              <a href="javascript:void(0)" onclick="format('bold')">
+                <i class="fas fa-bold"></i>
+              </a>
+              <a href="javascript:void(0)" onclick="format('italic')">
+                <i class="fas fa-italic"></i>
+              </a>
+              <a
+                href="javascript:void(0)"
+                onclick="format('insertunorderedlist')"
+              >
+                <i class="fas fa-list-ul"></i>
+              </a>
+              <span class="goLink">
+                <i class="fas fa-link"></i>
+              </span>
+            </div>
+            <b class="d-block">Write contents for the post</b>
+            <div class="setUrl d-flex justify-content-center mb-2">
+              <input type="text" class="form-control link" id="txtFormatUrl"/>
+              <a class="linkbtn" href="javascript:void(0)" onclick="setUrl()">
+                <i class="fas fa-link"></i>
+              </a>
+            </div>
+            <div
+              id="editorjs"
+              class="form-control"
+              contenteditable="true"
+            ></div>
+            <input type="text" name="content" class="d-none">
+            <button class="btn btn-success mt-3 mb-5" id="submit" type="button">SUBMIT</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    {{! JavaScript included }}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/597533284d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function format(command, value) {
+			document.execCommand(command, false, value);
+      }
+      const ce = document.querySelector('[contenteditable]')
+      ce.addEventListener('paste', function (e) {
+        e.preventDefault()
+        const text = e.clipboardData.getData('text/plain')
+        document.execCommand('insertText', false, text)
+      })
+
+      function setUrl() {
+        var url = document.getElementById('txtFormatUrl').value;
+        var sText = document.getSelection();
+        document.execCommand('insertHTML', false, '<a href="' + url + '" target="_blank">' + sText + '</a>');
+        document.getElementById('txtFormatUrl').value = '';
+      }
+
+        const goLink = document.querySelector(".goLink");
+        const set_url = document.querySelector(".setUrl");
+
+        goLink.addEventListener('click', ()=>{
+            if(set_url.classList.contains('h-35')){
+                set_url.classList.remove('h-35')
+            }else{
+                set_url.classList.add('h-35')
+            }
+        })
+
+        // submitting to backend 
+
+        const submit = document.getElementById('submit');
+        const title = document.getElementById('title');
+        const desc = document.getElementById('desc');
+        const category = document.getElementById("category");
+        const content = document.getElementById('editorjs');
+        const contentUp = document.querySelector("input[name='content']");
+
+        submit.addEventListener('click', ()=>{
+          contentUp.value = content.innerHTML;
+            if(title.value === '' || desc.value === '' || content.innerHTML === ''){
+                if(title.value == ''){
+                    alert("Please, fill up the title");
+                }
+                if(desc.value == ''){
+                    alert("Please, fill up the description");
+                }
+                if(content.innerHTML == ''){
+                    alert("Please, fill up the content");
+                }
+                submit.type = 'button'
+            }else{
+                alert('The Blog has been added');
+                submit.type = 'submit';
+            }
+        })
+    </script>
+  </body>
+</html>

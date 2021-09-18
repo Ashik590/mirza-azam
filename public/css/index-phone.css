@@ -1,0 +1,31 @@
+@media screen and (max-width:1000px) {
+    #know .col-lg-4:not(.col-lg-4:last-child){
+        margin-bottom: 70px;
+    }
+}
+@media screen and (max-width:768px) {
+    #testi .row .col-md-6:first-child {
+        min-height: 400px;
+    }
+    #contact .row {
+        gap: 25px;
+    }
+}
+@media screen and (max-width:575px) {
+    #hero .container{
+        padding-top: 20px;
+    }
+}
+@media screen and (max-width:500px) {
+    #testi .row .col-md-6:first-child {
+        min-height: 300px;
+    }
+}
+@media screen and (max-width:450px) {
+    #hero .container {
+        padding-top: 0px;
+    }
+    .logo img {
+        height: 180px;
+    }
+}

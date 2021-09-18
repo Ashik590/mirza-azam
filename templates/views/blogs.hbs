@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirza Azam - Blogs</title>
+    <link rel="shortcut icon" href="/img/fav.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/common-phone.css">
+    <style>
+        .item {
+            padding: 20px 30px;
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 20px;
+        }
+        .photo{
+            background-position: center center !important;
+            background-size: cover !important;
+        }
+        span.d-flex small{
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 11px;
+        }
+        span.d-flex{
+            justify-content: end;
+            gap: 15px;
+        }
+        .itemParent{
+            display: grid;
+            gap: 20px;
+        }
+        @media screen and (max-width:991px) {
+            .item{
+                grid-template-columns: 1fr;
+            }
+            .photo{
+                min-height: 150px;
+                max-width: 230px;
+                margin: auto;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    {{>header}}
+    <nav>
+        <ul class="ps-0 mb-0">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/about">About</a>
+            </li>
+            <li>
+                <a href="/timeline">Timeline</a>
+            </li>
+            <li>
+                <a href="/gallery">Gallery</a>
+            </li>
+            <li>
+                <a href="/speech">Speeches & Reports</a>
+            </li>
+            <li>
+                <a href="/news">News & Events</a>
+            </li>
+            <li>
+                <a class="active" href="/blogs">Blogs</a>
+            </li>
+            <li>
+                <a href="/contact">Contacts</a>
+            </li>
+        </ul>
+    </nav>
+
+    <section id="Development_Work">
+        <div class="container">
+            <h1 class="b-line">Development Work</h1>
+            <div class="row">
+                <div class="col-md-10 mx-auto itemParent">
+                    {{#each blogCat.dev_work}}
+                    <div class="shadow item border">
+                        <div class="photo" style="background: url('upload/{{this.photo}}');"></div>
+                        <div>
+                            <span class="d-flex">
+                                <small class="text-secondary text-uppercase date">{{this.date}}</small>
+                                <small class="text-secondary">{{this.comment.length}} comments</small>
+                            </span>
+                            <h2 class="fw-bold text-capitalize mt-2">{{this.title}}</h2>
+                            <p class="text-secondary">{{this.desc}}</p>
+                            <a href="/blogs/{{this._id}}" class="btns">READ MORE</a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Speeches_Reports">
+        <div class="container">
+            <h1 class="b-line">Speeches & Reports</h1>
+            <div class="row">
+                <div class="col-md-10 mx-auto itemParent">
+                    {{#each blogCat.speeches_interviews}}
+                    <div class="shadow item border">
+                        <div class="photo" style="background: url('upload/{{this.photo}}');"></div>
+                        <div>
+                            <span class="d-flex">
+                                <small class="text-secondary text-uppercase date">{{this.date}}</small>
+                                <small class="text-secondary">{{this.comment.length}} comments</small>
+                            </span>
+                            <h2 class="fw-bold text-capitalize mt-2">{{this.title}}</h2>
+                            <p class="text-secondary">{{this.desc}}</p>
+                            <a href="/blogs/{{this._id}}" class="btns">READ MORE</a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="News_Events">
+        <div class="container">
+            <h1 class="b-line">News & Reports</h1>
+            <div class="row">
+                <div class="col-md-10 mx-auto itemParent">
+                    {{#each blogCat.news_events}}
+                    <div class="shadow item border">
+                        <div class="photo" style="background: url('upload/{{this.photo}}');"></div>
+                        <div>
+                            <span class="d-flex">
+                                <small class="text-secondary text-uppercase date">{{this.date}}</small>
+                                <small class="text-secondary">{{this.comment.length}} comments</small>
+                            </span>
+                            <h2 class="fw-bold text-capitalize mt-2">{{this.title}}</h2>
+                            <p class="text-secondary">{{this.desc}}</p>
+                            <a href="/blogs/{{this._id}}" class="btns">READ MORE</a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Social_activites">
+        <div class="container">
+            <h1 class="b-line">Social Activities</h1>
+            <div class="row">
+                <div class="col-md-10 mx-auto itemParent">
+                    {{#each blogCat.social_activities}}
+                    <div class="shadow item border">
+                        <div class="photo" style="background: url('upload/{{this.photo}}');"></div>
+                        <div>
+                            <span class="d-flex">
+                                <small class="text-secondary text-uppercase date">{{this.date}}</small>
+                                <small class="text-secondary">{{this.comment.length}} comments</small>
+                            </span>
+                            <h2 class="fw-bold text-capitalize mt-2">{{this.title}}</h2>
+                            <p class="text-secondary">{{this.desc}}</p>
+                            <a href="/blogs/{{this._id}}" class="btns">READ MORE</a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="upper_footer">
+        <div class="d-flex justify-content-center">
+            <a href="/">
+                <img src="img/logo.png" alt="Logo">
+            </a>
+        </div>
+    </section>
+    <footer>
+        <div class="p-3">
+            Mirza Azam © 2021. All Rights Reserved. Developed by A2Z Creatives & IT
+        </div>
+    </footer>
+
+    {{!-- JavaScript included here --}}
+    <script src="js/nav.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        const itemParent = document.querySelectorAll('.itemParent');
+
+        for(const p of itemParent){
+            if(p.innerText == ''){
+                p.innerText = 'No blog remains for this category.'
+            }
+        }
+
+        const dates = document.querySelectorAll('.date');
+
+        for(const d of dates){
+            d.innerText = moment(d.innerText).format('LLL');
+        }
+    </script>
+</body>
+</html>
